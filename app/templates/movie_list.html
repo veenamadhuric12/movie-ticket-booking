@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block content %}
+    <section id="isec1">
+    <br>
+    <h2 id="ih2">Recommended Movies</h2>
+    <br>
+    <div id="idiv1">
+        {% for movie in movies %}
+            <div>
+                <a href="{% url 'details' movie.id %}"><img src="{{ movie.image.url }}" alt="" id="iimg"></a>
+                <p id="ip1">{{ movie.title }}</p>
+                <p id="ip2">{{movie.description}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <br><br><br><br><br>
+    <img src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-1440,h-120/stream-leadin-web-collection-202210241242.png" alt="" id="iimg2">
+    <br><br><br><br>
+    </section>
+
+{% endblock content %}

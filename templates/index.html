@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                {{ message }}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <section>
+        <nav id="inavbar">
+            <aside>
+                <img src="https://in.bmscdn.com/bmsin/new/BMS_logo_new.png" alt="">
+            </aside>
+            <aside>
+                <form id="isearch" action="" method="post">
+                    {% csrf_token %}
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search for Movies" id="iinp" name="search">
+                    <button type="submit" id="isub">Search</button>
+                </form>
+            </aside>
+            <aside>
+                <ul id="iul">
+                    <li><a href="{% url 'login' %}"><button class="ibtn">LogIn</button></a></li>
+                    <li><a href="{% url 'logout' %}"><button class="ibtn">LogOut</button></a></li>
+                </ul>
+            </aside>
+        </nav>
+        <nav id="inav2">
+            <p>Movies</p>
+        </nav>
+    </section>
+    {% block content %}
+
+    {% endblock content %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        toastElList.forEach(function (toastEl) {
+            new bootstrap.Toast(toastEl).show()
+        })
+    </script>
+</body>
+</html>

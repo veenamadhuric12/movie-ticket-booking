@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h2 id="loghead">Login page</h2>
+    <form action="" method="post" id="logform">
+        {% csrf_token %}
+        <label for="">Username</label><br>
+        <input type="text" name="un" id=""><br><br>
+        <label for="">Password</label><br>
+        <input type="password" name="pwd" id=""><br><br>
+        <button type="submit" id="logbtn">LOGIN</button>
+    </form>
+    <div id="logdiv">
+        <p>Don't have an account</p>
+        <a href="{% url 'register' %}" id="logan"><h2>Register</h2></a>
+    </div>
+</body>
+</html>

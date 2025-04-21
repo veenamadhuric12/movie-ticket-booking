@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a href="{% url 'list' %}" id="confhome">Home</a>
+    <section id="conf">
+        <h1 id="chead">Seats Booked Successfully!</h1>
+
+        <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+        <p><strong>Movie:</strong> {{ booking.show_time.movie.title }}</p>
+        <p><strong>Theater:</strong> {{ booking.show_time.theater.name }}</p>
+        <p><strong>Show Time:</strong> {{ booking.show_time.show_time }}</p>
+
+        <p><strong>Number of Tickets:</strong> {{ seats|length }}</p>
+
+        <p id="cps"><strong>Seats:</strong>
+            {% for seat in seats %}
+                {{ seat.row }}{{ seat.number }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+
+        <p><strong>Total Price:</strong> ₹{{ booking.total_price }}</p>
+    </section>
+</body>
+</html>

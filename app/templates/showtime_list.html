@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2 id="fh2">ShowTime List</h2>
+    <form method="post">
+        {% csrf_token %}
+        <section id="fsec1">
+            {% for i in theater %}
+            <div id="fmain">
+                <div id="fdiv1">
+                    {{i.name}} : {{i.location}}
+                </div>
+                <div id="fdiv2">
+                    {% for j in showtime %} 
+                    <div id="fdiv3">
+                        {% if j.theater == i %}                           
+                            <a href="{% url 'tickets' j.id %}">
+                                {{j.show_time.date}}<br> 
+                                {{j.show_time.time}} 
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% endfor %} <br>
+                </div>
+            </div> <br>
+            {% endfor %}
+        </section>
+    </form>
+{% endblock content %}

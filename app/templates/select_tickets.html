@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block content %}
+
+    <div id="select-tickets">
+        <h3 id="st1">Select Tickets for {{ showtime.movie.title }} at {{ showtime.theater.name }}</h3>
+        <p id="st2">Show Time: {{ showtime.show_time }}</p>
+        <p id="st3">Price: ${{ showtime.price }}</p>
+    </div>
+
+    <form method="post" id="stform">
+        {% csrf_token %}
+        <label for="num_tickets">Number of Tickets:</label>
+        <input type="number" id="tickets" name="tickets" required min="1" max="10"><br><br>
+        <button type="submit" id="stbtn">Continue</button>
+    </form>
+
+{% endblock content %}

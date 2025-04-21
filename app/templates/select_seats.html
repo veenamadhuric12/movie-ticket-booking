@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1 id="sshead">Select {{ ticket_count }} Seat(s)</h1>
+
+    <form method="post" id="ssform">
+        {% csrf_token %}
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+        <div class="seat-grid">
+            {% for seat in seats %}
+                <label class="seat-label 
+                    {% if seat.is_booked %}booked{% else %}available{% endif %}" 
+                    data-seat-id="{{ seat.id }}">
+                    
+                    {% if not seat.is_booked %}
+                        <input type="checkbox" name="selected_seats" value="{{ seat.id }}">
+                    {% endif %}
+                    
+                    {{ seat.row }}{{ seat.number }}
+                </label>
+
+                {% if forloop.counter|divisibleby:10 %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <br>
+        <button type="submit" id="ssbtn">Confirm Seats</button>
+    </form>
+
+    <script>
+        const ticketLimit = parseInt("{{ ticket_count|default:1 }}");
+        let selectedCount = 0;
+
+        document.querySelectorAll('.seat-label.available').forEach(label => {
+            const checkbox = label.querySelector('input[type="checkbox"]');
+
+            label.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (!checkbox) return;
+
+                if (!checkbox.checked && selectedCount < ticketLimit) {
+                    checkbox.checked = true;
+                    label.classList.add('selected');
+                    selectedCount++;
+                } else if (checkbox.checked) {
+                    checkbox.checked = false;
+                    label.classList.remove('selected');
+                    selectedCount--;
+                } else {
+                    alert(`You can select only ${ticketLimit} seat(s).`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

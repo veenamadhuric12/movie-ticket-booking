@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% block content %}
+    <section id="dsec1">
+        <br>
+        <h3 id="dh3">Movie Details</h3>
+        <br>
+        <div id="ddiv2">
+            <div id="ddiv3">
+                <img src="{{ movie.image.url }}" alt="" id="dimg">
+                <div>
+                    <p id="dp1">{{ movie.title }}</p> <br>
+                    <p id="dp2">⭐{{ movie.description }}</p><br>
+                    <p id="dp3">Duration : {{ movie.duration }} min</p><br>
+                    <p id="dp4">{{ movie.release_date }}</p><br> 
+                    <a href="{% url 'show_list' movie.id %}"><button id="dbtn">Book Tickets</button></a>
+                </div>    
+            </div><br><br>
+        </div>
+    </section>
+{% endblock content %}
