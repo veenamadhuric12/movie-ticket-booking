@@ -1,5 +1,5 @@
 # movie-ticket-booking
-A web-based Movie Ticket Booking System built with Django
+A web-based Movie Ticket Booking System built with Django.It is a real time project.
 
 ![Image](https://github.com/user-attachments/assets/6af89c8e-93c5-4c2e-9abc-2d76eb2daeba)
 
